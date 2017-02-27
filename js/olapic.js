@@ -13,25 +13,26 @@ $(document).ready(function() {
         var media_url = media._links.self.href;
         $.ajax(media_url, {
             success: function(resp) {
-                $("#olapic_gallery").html("");
+                $("#olapic_gallery").html('');
                 $.each(resp.data._embedded.media, renderMedia); 
-                // Now create the gallery/carusel
-                addLightGallery(gallery_settings);
             },
             error: function() {
+                $('.page-loading').remove();
                 $("#olapic_gallery").html("error fetching media");
+            },
+            complete: function(resp) {
+                if (resp.status===200) { // success
+                    $('.page-loading').remove();
+                    // Now create the gallery/carusel
+                    addLightGallery(gallery_settings);
+                }
             }
         });
     };
 
     /* Generate a single piece of media. */
     function renderMedia(i, resp) {
-        var item = new Object();
-        item.src = resp.images.original;
-        item.thumb = resp.images.thumbnail;
-        item.subHtml = resp.caption;
-        item.downloadUrl = false;
-        gallery_settings.push(item);
+        $("#olapic_gallery").append('<a class="' + (i>5 ? 'hide' : '') + '" data-sub-html="'+resp.caption+'" data-download-url=false href="'+resp.images.original+'"><img src="'+resp.images.thumbnail+'" /></a>');
     };
 
     /*
@@ -45,23 +46,22 @@ $(document).ready(function() {
                 callBack(resp.data._embedded.customer._embedded.media);
             },
             error: function() {
+                $('.page-loading').remove();
                 $("#olapic_gallery").html("error with authentication"); 
             }
         });
     };
 
     function addLightGallery(settings) {
-        $('#lightgallery').lightGallery({
-            dynamic: true,
-            dynamicEl: settings,
-            loop: true,
-            fourceAutoply: false,
-            autoplay: true,
+        $("#olapic_gallery").lightGallery({
             thumbnail: true,
-            pager: $(window).width() >= 768 ? true : false,
-            speed: 400,
-            scale: 1,
-            keypress: true
+            animateThumb: true,
+            thumbMargin: 10,
+            thumbWidth: 100,
+            thumbContHeight: 100,
+            autoplay: true,
+            loop: true,
+            speed: 400
         });
     };
 
