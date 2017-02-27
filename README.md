@@ -8,6 +8,8 @@ responsive. :-) I have never used this particular gallery plugin before but
 reviewing several others - and considering writing my own - showed 
 LightGallery to be a good choice here.
 
+![Screenshot of the gallery in action](screenshot_showing_gallery.png)
+
 I followed the Olapic API docs, calling auth to ensure my token is valid
 and then grabbing the [default] 'recent' "media" endpoint from the auth
 response. This follows the API recommendations as it ensures Olapic
