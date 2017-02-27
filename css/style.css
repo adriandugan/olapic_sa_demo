@@ -21,3 +21,7 @@ h2 {
   width: 100px;
   height: 100px;
 }
+
+.lg-outer{
+    transition: background-color 600ms ease 0s;
+}

@@ -6,8 +6,6 @@ $(document).ready(function() {
 
     var auth_url = base_url+'?auth_token='+token+'&version='+version;
 
-    var gallery_settings = []; // Contains the gallery items
-
     /* Fetch the first page (20 items) of media. */ 
     function fetchMedia(media) {
         var media_url = media._links.self.href;
@@ -24,7 +22,7 @@ $(document).ready(function() {
                 if (resp.status===200) { // success
                     $('.page-loading').remove();
                     // Now create the gallery/carusel
-                    addLightGallery(gallery_settings);
+                    addLightGallery();
                 }
             }
         });
@@ -52,6 +50,7 @@ $(document).ready(function() {
         });
     };
 
+    /* fire up the lightGallery carousel. */
     function addLightGallery(settings) {
         $("#olapic_gallery").lightGallery({
             thumbnail: true,
@@ -63,13 +62,20 @@ $(document).ready(function() {
             loop: true,
             speed: 400
         });
+
+        /* Change the lightbox background colour. */
+        var colours = ['#21171A', '#81575E', '#9C5043', '#8F655D'];
+        $('#olapic_gallery').on('onBeforeSlide.lg', function(event, prevIndex, index){
+            $('.lg-outer').css('background-color', colours[Math.floor(Math.random() * 4)])
+        });
     };
 
-    function run() {
+    function fire() {
         // auth, then fetch media and display media
         auth(auth_url, fetchMedia);
     };
 
-    run();
+    /* Let's kick it off. */
+    fire();
 
 });
