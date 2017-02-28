@@ -30,6 +30,8 @@ results per page). See: http://apiv2-docs.photorank.me/index.html#header-paginat
 I had planned on pulling back the next page as you scroll through the results
 by utilising AJAX get requests - but see above note on 'pagination'.
 
+update: I have now found how to do this: `page_key`.
+
 ### improve error handling
 
 I would add more error handling to the demo but I didn't give myself enough
