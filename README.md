@@ -1,8 +1,6 @@
 # Olapic SA role - gallery demo
 
-This repo contains a demo page showing interation with Olapic's "media" API.
-
-You can see it in action [here](https://adriandugan.github.io/olapic_sa_demo/).
+This repo contains a demo page showing integration with Olapic's "media" API. You can see it in action [here](https://adriandugan.github.io/olapic_sa_demo/).
 
 The demo uses jQuery [v3.1.1] and hooks up to [LightGallery](https://github.com/sachinchoolur/lightGallery), which is feature-rich, providing a gallery 
 view with carousel, auto-play, mouse & keyboard controls and it's HTML5 
